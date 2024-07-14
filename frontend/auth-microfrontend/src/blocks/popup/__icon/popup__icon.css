@@ -1,0 +1,14 @@
+.popup__icon {
+  display: block;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+}
+
+.popup__icon_error {
+  background: transparent url('../../../images/error-icon.svg') center no-repeat;
+}
+
+.popup__icon_success {
+  background: transparent url('../../../images/success-icon.svg') center no-repeat;
+}
