@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, useHistory, Switch } from "react-router-dom";
+import {Route, Switch, useHistory} from "react-router-dom";
 import * as auth from "../utils/auth";
 import Register from "./Register";
 import Login from "./Login";
@@ -17,7 +17,9 @@ function Auth({onChange}) {
             auth
                 .checkToken(token)
                 .then((res) => {
-                    onChange(res.data.email);
+                    if (onChange !== undefined) {
+                        onChange(res.data.email);
+                    }
                     history.push("/");
                 })
                 .catch((err) => {
@@ -64,10 +66,10 @@ function Auth({onChange}) {
         <div>
             <Switch>
                 <Route path="/signup">
-                    <Register onRegister={onRegister} />
+                    <Register onRegister={onRegister}/>
                 </Route>
                 <Route path="/signin">
-                    <Login onLogin={onLogin} />
+                    <Login onLogin={onLogin}/>
                 </Route>
             </Switch>
             <InfoTooltip

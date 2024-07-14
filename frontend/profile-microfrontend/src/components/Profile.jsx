@@ -15,7 +15,7 @@ function Profile({onChangeUserData, onAddNewPlace, userData}) {
         if (userData === undefined) {
             api
                 .getUserInfo()
-                .then(([cardData, userData]) => {
+                .then((userData) => {
                     setCurrentUser(userData);
                 })
                 .catch((err) => console.log(err));

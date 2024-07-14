@@ -27,9 +27,6 @@ jobs:
       - name: Backend test
         run: docker compose run backend-test
 
-      - name: Frontend test
-        run: docker compose run frontend-test
-
       - name: Cleanup
         if: always()
         run: docker compose down

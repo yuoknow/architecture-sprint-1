@@ -11,11 +11,14 @@ export default defineConfig({
             exposes: {
                 './Places': './src/components/Places',
             },
-            shared: ['react', 'react-dom', 'react-router-dom'],
+            shared: ['react', 'react-dom'],
         }),
     ],
     server: {
         port: 5003,
+        strictPort: true,
+        host: true,
+        origin: "http://0.0.0.0:5003",
     },
     build: {
         modulePreload: false,

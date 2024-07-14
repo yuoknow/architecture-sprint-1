@@ -1,0 +1,28 @@
+services:
+  auth-microfrontend:
+    build:
+      context: frontend/auth-microfrontend
+    ports:
+      - 5001:5001
+  profile-microfrontend:
+    build:
+      context: frontend/profile-microfrontend
+    ports:
+      - 5002:5002
+  places-microfrontend:
+    build:
+      context: frontend/places-microfrontend
+    ports:
+      - 5003:5003
+  frontend:
+    build:
+      context: frontend
+    ports:
+      - 5000:5000
+    depends_on:
+      auth-microfrontend:
+        condition: service_started
+      profile-microfrontend:
+        condition: service_started
+      places-microfrontend:
+        condition: service_started

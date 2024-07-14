@@ -11,11 +11,14 @@ export default defineConfig({
             exposes: {
                 './Profile': './src/components/Profile',
             },
-            shared: ['react', 'react-dom', 'react-router-dom'],
+            shared: ['react', 'react-dom'],
         }),
     ],
     server: {
         port: 5002,
+        strictPort: true,
+        host: true,
+        origin: "http://0.0.0.0:5002",
     },
     build: {
         modulePreload: false,

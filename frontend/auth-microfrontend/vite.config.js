@@ -18,6 +18,9 @@ export default defineConfig({
     ],
     server: {
         port: 5001,
+        strictPort: true,
+        host: true,
+        origin: "http://0.0.0.0:5001",
     },
     build: {
         modulePreload: false,
