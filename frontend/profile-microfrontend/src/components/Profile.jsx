@@ -3,6 +3,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import api from "../utils/api";
 import AddPlacePopup from "./AddPlacePopup";
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Profile({onChangeUserData, onAddNewPlace, userData}) {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -21,7 +22,6 @@ function Profile({onChangeUserData, onAddNewPlace, userData}) {
         } else {
             setCurrentUser(userData);
         }
-
     }, [userData]);
 
     function handleEditProfileClick() {
@@ -78,32 +78,35 @@ function Profile({onChangeUserData, onAddNewPlace, userData}) {
     const imageStyle = {backgroundImage: `url(${currentUser.avatar})`};
 
     return (
-        <div>
-            <section className="profile page__section">
-                <div className="profile__image" onClick={handleEditAvatarClick} style={imageStyle}></div>
-                <div className="profile__info">
-                    <h1 className="profile__title">{currentUser.name}</h1>
-                    <button className="profile__edit-button" type="button" onClick={handleEditProfileClick}></button>
-                    <p className="profile__description">{currentUser.about}</p>
-                </div>
-                <button className="profile__add-button" type="button" onClick={handleAddPlaceClick}></button>
-            </section>
-            <EditProfilePopup
-                isOpen={isEditProfilePopupOpen}
-                onUpdateUser={handleUpdateUser}
-                onClose={closeAllPopups}
-            />
-            <EditAvatarPopup
-                isOpen={isEditAvatarPopupOpen}
-                onUpdateAvatar={handleUpdateAvatar}
-                onClose={closeAllPopups}
-            />
-            <AddPlacePopup
-                isOpen={isAddPlacePopupOpen}
-                onAddPlace={handleAddPlaceSubmit}
-                onClose={closeAllPopups}
-            />
-        </div>
+        <CurrentUserContext.Provider value={currentUser}>
+            <div>
+                <section className="profile page__section">
+                    <div className="profile__image" onClick={handleEditAvatarClick} style={imageStyle}></div>
+                    <div className="profile__info">
+                        <h1 className="profile__title">{currentUser.name}</h1>
+                        <button className="profile__edit-button" type="button"
+                                onClick={handleEditProfileClick}></button>
+                        <p className="profile__description">{currentUser.about}</p>
+                    </div>
+                    <button className="profile__add-button" type="button" onClick={handleAddPlaceClick}></button>
+                </section>
+                <EditProfilePopup
+                    isOpen={isEditProfilePopupOpen}
+                    onUpdateUser={handleUpdateUser}
+                    onClose={closeAllPopups}
+                />
+                <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
+                    onUpdateAvatar={handleUpdateAvatar}
+                    onClose={closeAllPopups}
+                />
+                <AddPlacePopup
+                    isOpen={isAddPlacePopupOpen}
+                    onAddPlace={handleAddPlaceSubmit}
+                    onClose={closeAllPopups}
+                />
+            </div>
+        </CurrentUserContext.Provider>
     )
 }
 

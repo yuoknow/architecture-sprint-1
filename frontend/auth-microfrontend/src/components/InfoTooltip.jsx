@@ -1,10 +1,7 @@
 import React from 'react';
-import SuccessIcon from '../images/success-icon.svg';
-import ErrorIcon from '../images/error-icon.svg';
 
 function InfoTooltip({ isOpen, onClose, status }) {
-  const icon = status === 'success' ? SuccessIcon : ErrorIcon
-  const text = status === 'success' ? "Вы успешно зарегистрировались" : 
+  const text = status === 'success' ? "Вы успешно зарегистрировались" :
      "Что-то пошло не так! Попробуйте ещё раз."
   return (
     <div className={`popup ${isOpen && 'popup_is-opened'}`}>
@@ -12,7 +9,7 @@ function InfoTooltip({ isOpen, onClose, status }) {
         <form className="popup__form" noValidate>
           <button type="button" className="popup__close" onClick={onClose}></button>
             <div>
-              <img className="popup__icon" src={icon} alt=""/>
+              <div className={`popup__icon ${status === 'fail' ? 'popup__icon_error' : 'popup__icon_success'} `} alt=""/>
               <p className="popup__status-message">{text}</p>
             </div>
         </form>
